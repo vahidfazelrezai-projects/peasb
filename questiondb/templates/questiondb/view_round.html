@@ -3,9 +3,10 @@
 <h2>{{ round.name }}</h2>
 
 <ol>
-{% for question in round.question_set.all %}
+{% for question in round.question_set.all|dictsort:"index" %}
 <li style="white-space: pre-wrap;">{{ question.question_type }}
-{{ question.subject }} {{ question }}
+{{ question.subject }} {{ question.question_format }}
+{{ question }}
 Answer: {{ question.answer }}</li>
 {% endfor %}
 </ol>

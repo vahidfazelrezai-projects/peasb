@@ -19,12 +19,21 @@ class Question(models.Model):
   QUESTION_TYPES = (
       ('Toss-up', 'Toss-up'),
       ('Bonus', 'Bonus'),
-      )
+  )
   question_type = models.CharField(
       max_length=7,
       choices=QUESTION_TYPES,
-      default='T'
-      )
+      default='Toss-up'
+  )
+  QUESTION_FORMATS = (
+      ('Multiple Choice', 'Multiple Choice'),
+      ('Short Answer', 'Short Answer'),
+  )
+  question_format = models.CharField(
+      max_length=15,
+      choices=QUESTION_FORMATS,
+      default='Multiple Choice'
+  )
   subject = models.ForeignKey(Subject)
   question = models.TextField()
   answer = models.CharField(max_length=200)
