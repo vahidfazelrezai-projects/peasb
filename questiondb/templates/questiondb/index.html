@@ -1,0 +1,7 @@
+<h1>PEA Scibowl: Question Database</h1>
+
+<ul>
+{% for round in rounds %}
+  <li><a href="{{ round.id }}/">{{ round }}</a></li>
+{% endfor %}
+</ul>

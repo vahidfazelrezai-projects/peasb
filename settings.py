@@ -1,0 +1,1 @@
+from peascibowl.settings import *

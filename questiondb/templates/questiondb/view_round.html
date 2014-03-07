@@ -1,0 +1,11 @@
+<h1>PEA Scibowl: Question Database</h1>
+
+<h2>{{ round.name }}</h2>
+
+<ol>
+{% for question in round.question_set.all %}
+<li style="white-space: pre-wrap;">{{ question.question_type }}
+{{ question.subject }} {{ question }}
+Answer: {{ question.answer }}</li>
+{% endfor %}
+</ol>
