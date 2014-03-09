@@ -102,8 +102,8 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'peascibowl.urls'
 
+# Adds directory 'peasb/templates' into list of templates
 import os
-
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
@@ -115,18 +115,20 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    # Do not uncomment. This breaks admin interface. 
     # 'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'djangotoolbox',
     'autoload',
     'dbindexer',
+    # Gives additional options for permissions. 
     'permission_backend_nonrel',
 
+    # Our app!
     'questiondb',
 
     # djangoappengine should come last, so it can override a few manage.py commands
