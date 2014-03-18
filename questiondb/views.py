@@ -1,3 +1,5 @@
+import time
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
@@ -20,6 +22,7 @@ def view_round(request, round_id):
                 question.index = Round.objects.get(id=round_id).question_set.count()
                 question.problemset = Round.objects.get(id=round_id)
                 question.save()
+                time.sleep(0.1)
     r = get_object_or_404(Round, pk=round_id)
     form = RoundEditForm(instance=r)
     return render(request, 'questiondb/view_round.html', {'form': form, 'round': r})

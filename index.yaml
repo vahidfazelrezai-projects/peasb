@@ -114,6 +114,20 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: questiondb_question
+  properties:
+  - name: pub_date
+    direction: desc
+  - name: __key__
+    direction: desc
+
+- kind: questiondb_question
+  properties:
+  - name: question
+    direction: desc
+  - name: __key__
+    direction: desc
+
 - kind: questiondb_round
   properties:
   - name: __key__

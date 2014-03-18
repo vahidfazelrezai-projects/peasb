@@ -2,7 +2,6 @@ from django.db import models
 from django import forms
 from django.contrib.auth.models import User
 
-# What the moo is this garbage? Needs rewrite.
 class Round(models.Model):
     name = models.CharField(max_length=200)
     author = models.ForeignKey(User, blank=True)
@@ -38,7 +37,7 @@ class Question(models.Model):
     question = models.TextField()
     answer = models.CharField(max_length=200)
     citation = models.CharField(max_length=200, blank=True)
-    pub_date = models.DateField('date added', blank=True)
+    pub_date = models.DateField('date added')
     author = models.ForeignKey(User)
 
     attempts = models.IntegerField(default=0, editable=False)
