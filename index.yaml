@@ -116,6 +116,18 @@ indexes:
 
 - kind: questiondb_question
   properties:
+  - name: problemset_id
+  - name: __key__
+    direction: desc
+
+- kind: questiondb_question
+  properties:
+  - name: problemset_id
+  - name: pub_date
+    direction: desc
+
+- kind: questiondb_question
+  properties:
   - name: pub_date
     direction: desc
   - name: __key__

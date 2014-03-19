@@ -3,8 +3,8 @@
 {% block content %}
   {% include "navbar.html" %}
   <ul>
-  {% for question in questions %}
-    <li>{{ question }} </li>
-  {% endfor %}
+    {% for question in questions %}
+      <li>{{ question }} </li>
+    {% endfor %}
   </ul>
 {% endblock %}

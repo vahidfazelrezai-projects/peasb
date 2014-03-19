@@ -1,7 +1,7 @@
 from django.contrib import admin
 from questiondb.models import Round, Subject, Question
 
-# Creates admin interface for Round
+# Creates admin interface for models
 class RoundAdmin(admin.ModelAdmin):
     fields = ['name', 'author', 'pub_date']
 

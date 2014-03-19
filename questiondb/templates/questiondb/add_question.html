@@ -2,10 +2,13 @@
 
 {% block content %}
   {% include "navbar.html" %}
+  {% for message in status %}
+    {{ message }}
+  {% endfor %}
   <form method="post" action="">{% csrf_token %}
     {% for field in form %}
-    {{field.label_tag}} <br>
-    {{field}} <br>
+      {{field.label_tag}} <br>
+      {{field}} <br>
     {% endfor %}
     <input type="submit" value="Submit">
   </form>
