@@ -97,12 +97,14 @@ def view_questions(request):
         if form.is_valid():
             subject = form.cleaned_data['subject']
     questions = None
+    form = None
     if subject == None:
         questions = Question.objects.filter(problemset=None).order_by('-pub_date')
+        form = QuestionSelectForm()
     else:
         questions = Question.objects.filter(problemset=None,
                                             subject=subject).order_by('-pub_date')
-    form = QuestionSelectForm()
+        form = QuestionSelectForm(initial={'subject':subject.id})
     return render(request,
                   'questiondb/view_questions.html',
                   {'questions': questions, 'form': form})
