@@ -106,3 +106,7 @@ class QuestionForm(forms.ModelForm):
             'answer',
             'citation'
         ]
+
+class QuestionSelectForm(forms.Form):
+    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={'onchange': 'this.form.submit();'}))
+    

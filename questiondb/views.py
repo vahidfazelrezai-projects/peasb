@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
-from questiondb.models import Round, Question, RoundForm, RoundEditForm, QuestionForm
+from questiondb.models import Round, Question, RoundForm, RoundEditForm, QuestionForm, QuestionSelectForm
 
 # Index page. Lists all existing rounds
 @login_required(login_url='/login/')
@@ -87,11 +87,23 @@ def add_question(request):
                   'questiondb/add_question.html',
                   {'form': form, 'status': status})
 
-# View for viewing unassigned questions
+# View for viewing unassigned questions, supports filtering by subject. 
 # For viewing assigned questions, one should use admin page
+@login_required(login_url='/login/')
 def view_questions(request):
-    questions = Question.objects.filter(problemset=None).order_by('-pub_date')
+    subject = None
+    if request.method == 'POST':
+        form = QuestionSelectForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+    questions = None
+    if subject == None:
+        questions = Question.objects.filter(problemset=None).order_by('-pub_date')
+    else:
+        questions = Question.objects.filter(problemset=None,
+                                            subject=subject).order_by('-pub_date')
+    form = QuestionSelectForm()
     return render(request,
                   'questiondb/view_questions.html',
-                  {'questions': questions})
+                  {'questions': questions, 'form': form})
 

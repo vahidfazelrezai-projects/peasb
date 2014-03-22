@@ -2,9 +2,12 @@
 
 {% block content %}
   {% include "navbar.html" %}
+  <form method="post" action="">{% csrf_token %}
+    {{ form.subject.label_tag }}: {{ form.subject }}
+  </form>
   <ul>
     {% for question in questions %}
-      <li>{{ question }} </li>
+      <li>{{ question }}</li>
     {% endfor %}
   </ul>
 {% endblock %}
