@@ -2,8 +2,14 @@
 
 {% block content %}
   {% include "navbar.html" %}
+  <h2>Add Round</h2>
   <form method="post" action="">{% csrf_token %}
-    {{ form }}
+    <table>
+      <tr>
+        <td>{{ form.name.label_tag }}</td>
+        <td>{{ form.name }}</td>
+      </tr>
+    </table>
     <input type="submit" value="Submit">
   </form>
 {% endblock %}

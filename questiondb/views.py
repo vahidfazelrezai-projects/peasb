@@ -24,9 +24,12 @@ def view_round(request, round_id):
             question = Question.objects.get(id=form.cleaned_data['question_id'])
             # Check that question isn't already in the round we're trying to add to
             if question.problemset == None or question.problemset.id != long(round_id):
+                rd = Round.objects.get(id=round_id)
+                # Makes question numbers good (in case of deletions)
+                rd.fix()
                 # Sets index equal to number of questions currently in round
-                question.index = Round.objects.get(id=round_id).question_set.count()
-                question.problemset = Round.objects.get(id=round_id)
+                question.index = rd.question_set.count()
+                question.problemset = rd
                 question.save()
                 # Sleep to give database time to update
                 time.sleep(0.1)

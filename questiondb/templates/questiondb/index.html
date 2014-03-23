@@ -2,6 +2,7 @@
 
 {% block content %}
   {% include "navbar.html" %}
+  <h2>Rounds</h2>
   <ul>
     {% for round in rounds %}
       <li><a href="{{ round.id }}/">{{ round }}</a></li>

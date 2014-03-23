@@ -1,0 +1,37 @@
+body {
+  margin: auto;
+  width: 800px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  background-color: #900;
+  color: white;
+  padding: 6px;
+  font-family: Georgia, serif;
+}
+
+a {
+  color: #07C;
+  text-decoration: none;
+}
+
+
+li.navbar {
+  background-color: #900;
+  display: inline;
+  padding: 1px;
+  margin: 2px;
+}
+
+ul.navbar {
+  background-color: #900;
+  list-style-type: none;
+  margin: -22px 0px 0px 0px;
+  padding: 2px;
+}
+
+.navbar a {
+  color: #FFF;
+}
+

@@ -8,6 +8,15 @@ class Round(models.Model):
     pub_date = models.DateField(blank=True)
     def __unicode__(self):
         return self.name
+    def fix(self):
+        # fixes question indices
+        # for use when adding/deleting questions
+        questions = list(self.question_set.order_by('index'))
+        ind = 0
+        for q in questions:
+            q.index = ind
+            q.save()
+            ind += 1
 
 class Subject(models.Model):
     name = models.CharField(max_length=200)

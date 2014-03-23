@@ -123,6 +123,11 @@ indexes:
 - kind: questiondb_question
   properties:
   - name: problemset_id
+  - name: index
+
+- kind: questiondb_question
+  properties:
+  - name: problemset_id
   - name: pub_date
     direction: desc
 

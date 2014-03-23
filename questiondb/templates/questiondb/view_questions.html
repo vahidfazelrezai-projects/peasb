@@ -2,8 +2,9 @@
 
 {% block content %}
   {% include "navbar.html" %}
+  <h2>New Questions</h2>
   <form method="post" action="">{% csrf_token %}
-    {{ form.subject.label_tag }}: {{ form.subject }}
+    {{ form.subject.label_tag }} {{ form.subject }}
   </form>
   <ul>
     {% for question in questions %}
