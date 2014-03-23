@@ -7,8 +7,19 @@
     {{ form.subject.label_tag }} {{ form.subject }}
   </form>
   <ul>
-    {% for question in questions %}
-      <li>{{ question }}</li>
-    {% endfor %}
+    <table style="table-layout: fixed;">
+      <col width="150px" />
+      <col width="600px" />
+      <tr>
+        <th>Question ID</th>
+        <th>Question</th>
+      </tr>
+      {% for question in questions %}
+        <tr>
+          <td valign="top">{{ question.id }}</td>
+          <td valign="top">{{ question.question_type }} {{ question.subject }} {{ question.question_format }} {{ question.question}} </td>
+        </tr>
+      {% endfor %}
+    </table>
   </ul>
 {% endblock %}
