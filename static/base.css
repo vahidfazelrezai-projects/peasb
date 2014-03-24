@@ -7,15 +7,20 @@ body {
 h1 {
   background-color: #900;
   color: white;
-  padding: 6px;
+  padding: 20px 6px 6px 6px;
   font-family: Georgia, serif;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 a {
-  color: #07C;
+  color: #900;
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: underline;
+}
 
 li.navbar {
   background-color: #900;
@@ -27,11 +32,89 @@ li.navbar {
 ul.navbar {
   background-color: #900;
   list-style-type: none;
-  margin: -22px 0px 0px 0px;
-  padding: 2px;
+  height: 20px;
+  margin: 0;
+  padding: 5px;
 }
 
 .navbar a {
+  padding: 2px;
   color: #FFF;
 }
 
+.navbar a:hover {
+  color: #FCC;
+  text-decoration: none;
+}
+
+input[type="submit"] {
+  margin: 3px;
+  padding: 5px;
+  border-style: none;
+  background-color: #900;
+  color: #FFF;
+}
+
+input[type="submit"]:hover {
+  color: #FCC;
+}
+
+div#content {
+  margin-left: 10px;
+}
+
+/* select from http://cssdeck.com/labs/styling-select-box-with-css3 */
+
+select {
+  padding: 1px;
+  margin-bottom: 8px;
+  background: #FFF;
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  border-radius:3px;
+  border: solid 1px #AAA;
+  outline:none;
+  display: inline-block;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+  cursor:pointer;
+}
+
+/* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  select {padding-right:18px}
+}
+
+label.select {position:relative}
+label.select:after {
+  content:'<>';
+  font:11px "Consolas", monospace;
+  color:#000;
+  -webkit-transform:rotate(90deg);
+  -moz-transform:rotate(90deg);
+  -ms-transform:rotate(90deg);
+  transform:rotate(90deg);
+  right:2px; top:2px;
+  padding:0 0 2px;
+  position:absolute;
+  pointer-events:none;
+}
+
+label:before {
+  content:'';
+  right:1px; top:0px;
+  width:16px; height:19px;
+  background:#FFF;
+  position:absolute;
+  pointer-events:none;
+  display:block;
+}
+
+textarea {
+  margin-bottom: 4px;
+}
+
+input[type="text"] {
+  margin-bottom: 4px;
+}

@@ -29,5 +29,9 @@ handlers:
 - url: /static
   static_dir: static
 
+- url: /google37d7a99fe9cf43c3.html
+  static_files: static/google37d7a99fe9cf43c3.html
+  upload: /google37d7a99fe9cf43c3.html
+
 - url: /.*
   script: djangoappengine.main.application

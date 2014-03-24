@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block body %}
   {% include "navbar.html" %}
+{% endblock %}
+
+{% block content %}
   <h2>New Questions</h2>
   <form method="post" action="">{% csrf_token %}
-    {{ form.subject.label_tag }} {{ form.subject }}
+    <b>{{ form.subject.label_tag }}</b> &nbsp; <label class="select">{{ form.subject }}</label>
   </form>
   <ul>
     <table style="table-layout: fixed;">

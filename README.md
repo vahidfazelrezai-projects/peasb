@@ -13,9 +13,8 @@ PEA Science Bowl
 TODO: 
  - questiondb: 
    - tagging system
+   - inserting question into position on round
    - AJAX/jquery
-   - removing/inserting question into position on round
-   - do we need more things to have a frontend?
    - CSS/UI
  - practice system
   - ???

@@ -1,16 +1,29 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block body %}
   {% include "navbar.html" %}
+{% endblock %}
+
+{% block content %}
   <h2>Add Question</h2>
   {% for message in status %}
     {{ message }}
   {% endfor %}
   <form method="post" action="">{% csrf_token %}
-    {% for field in form %}
-      {{ field.label_tag }} <br>
-      {{ field }} <br>
-    {% endfor %}
+    <b>
+    {{ form.question_type.label_tag }} <br>
+    <label class="select">{{ form.question_type }}</label> <br>
+    {{ form.subject.label_tag }} <br>
+    <label class="select">{{ form.subject }}</label> <br>
+    {{ form.question_format.label_tag }} <br>
+    <label class="select">{{ form.question_format }}</label> <br>
+    {{ form.question.label_tag }} <br>
+    {{ form.question }} <br>
+    {{ form.answer.label_tag }} <br>
+    {{ form.answer }} <br>
+    {{ form.citation.label_tag }} <br>
+    {{ form.citation }} <br>
+    </b>
     <input type="submit" value="Submit">
   </form>
 {% endblock %}

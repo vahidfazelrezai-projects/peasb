@@ -15,7 +15,11 @@
   <body>
     <a href="/qdb/"><h1>PEA Scibowl <br>
         Question Database</h1></a>
-    {% block content %}
+    {% block body %}
     {% endblock %}
+    <div id="content">
+      {% block content %}
+      {% endblock %}
+    </div>
   </body>
 </html>
