@@ -78,6 +78,7 @@ def add_question(request):
                 question = form.cleaned_data['question'],
                 answer = form.cleaned_data['answer'],
                 citation = form.cleaned_data['citation'],
+                difficulty = form.cleaned_data['difficulty'],
                 author = request.user,
                 pub_date = timezone.now()
             )

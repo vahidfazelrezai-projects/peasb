@@ -12,14 +12,17 @@
   <ul>
     <table style="table-layout: fixed;">
       <col width="150px" />
+      <col width="100px" />
       <col width="600px" />
       <tr>
         <th>Question ID</th>
+        <th>Difficulty</th>
         <th>Question</th>
       </tr>
       {% for question in questions %}
         <tr>
           <td valign="top">{{ question.id }}</td>
+          <td valign="top" align="center">{{ question.get_difficulty_display }}</td>
           <td valign="top">{{ question.question_type }} {{ question.subject }} {{ question.question_format }} {{ question.question}} </td>
         </tr>
       {% endfor %}

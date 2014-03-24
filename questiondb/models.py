@@ -56,6 +56,19 @@ class Question(models.Model):
     # Represents position of Question in its round
     index = models.IntegerField(default=0)
 
+    # Introductory = first year high school course
+    # Intermediate = second year or AP
+    # Advanced = beyond AP
+    DIFFICULTIES = (
+        (1, 'Introductory'),
+        (2, 'Intermediate'),
+        (3, 'Advanced'),
+    )
+    difficulty = models.IntegerField(
+        choices = DIFFICULTIES,
+        default = 2
+    )
+
     # Returns default way to display Question
     def __unicode__(self):
         ret =  (
@@ -104,6 +117,8 @@ class QuestionForm(forms.ModelForm):
             return False
         if self.cleaned_data['answer'] == None:
             return False
+        if self.cleaned_data['difficulty'] == None:
+            return False
         return True
     class Meta:
         model = Question
@@ -113,6 +128,7 @@ class QuestionForm(forms.ModelForm):
             'question_format',
             'question',
             'answer',
+            'difficulty',
             'citation'
         ]
 

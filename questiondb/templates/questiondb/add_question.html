@@ -5,23 +5,25 @@
 {% endblock %}
 
 {% block content %}
-  <h2>Add Question</h2>
   {% for message in status %}
     {{ message }}
   {% endfor %}
+  <h2>Add Question</h2>
   <form method="post" action="">{% csrf_token %}
     <b>
-    {{ form.question_type.label_tag }} <br>
+    {{ form.question_type.label_tag }} &nbsp;
     <label class="select">{{ form.question_type }}</label> <br>
-    {{ form.subject.label_tag }} <br>
+    {{ form.subject.label_tag }} &nbsp;
     <label class="select">{{ form.subject }}</label> <br>
-    {{ form.question_format.label_tag }} <br>
+    {{ form.question_format.label_tag }} &nbsp;
     <label class="select">{{ form.question_format }}</label> <br>
     {{ form.question.label_tag }} <br>
     {{ form.question }} <br>
-    {{ form.answer.label_tag }} <br>
+    {{ form.answer.label_tag }} &nbsp;
     {{ form.answer }} <br>
-    {{ form.citation.label_tag }} <br>
+    <abbr title="Intro = 1st year high school, Intermediate = 2nd year or AP, Advanced = beyond AP">{{ form.difficulty.label_tag }}</abbr> &nbsp;
+    <label class="select">{{ form.difficulty }}</label> <br>
+    {{ form.citation.label_tag }} &nbsp;
     {{ form.citation }} <br>
     </b>
     <input type="submit" value="Submit">
