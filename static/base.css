@@ -1,11 +1,28 @@
+html {
+  background-color: #EEE;
+  height: 100%;
+}
+
 body {
+  background-color: #FFF;
   margin: auto;
+  padding: 0px 0px 50px 0px;
+  min-height: 100%;
+  height: auto;
   width: 800px;
   font-family: Arial, sans-serif;
+  box-shadow: 0px 0px 10px #AAA;
+  -moz-box-shadow: 0px 0px 10px #AAA;
+  -webkit-box-shadow: 0px 0px 10px #AAA;
+}
+
+div#content {
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 h1 {
-  background-color: #900;
+  background-color: #A00;
   color: white;
   padding: 20px 6px 6px 6px;
   font-family: Georgia, serif;
@@ -59,10 +76,6 @@ input[type="submit"]:hover {
   color: #FCC;
 }
 
-div#content {
-  margin-left: 10px;
-}
-
 /* select from http://cssdeck.com/labs/styling-select-box-with-css3 */
 
 select {
@@ -95,20 +108,52 @@ label.select:after {
   -moz-transform:rotate(90deg);
   -ms-transform:rotate(90deg);
   transform:rotate(90deg);
-  right:2px; top:2px;
+  right:6px; top:2px;
   padding:0 0 2px;
   position:absolute;
   pointer-events:none;
 }
 
-label:before {
-  content:'';
-  right:1px; top:0px;
+label.select:before {
+  content: '';
+  right:4px; top:0px;
   width:16px; height:19px;
   background:#FFF;
   position:absolute;
   pointer-events:none;
   display:block;
+}
+
+@-moz-document url-prefix() {
+  label.select:after {
+    content:'<>';
+    font:11px "Consolas", monospace;
+    color:#000;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform:rotate(90deg);
+    right:2px; top:2px;
+    padding:0 0 2px;
+    position:absolute;
+    pointer-events:none;
+  }
+
+  label.select:before {
+    content: '';
+    right:1px; top:0px;
+    width:16px; height:19px;
+    background:#FFF;
+    position:absolute;
+    pointer-events:none;
+    display:block;
+  }
+}
+
+/* end select */
+
+abbr {
+  border-bottom: 1px dotted;
 }
 
 textarea {
