@@ -35,6 +35,10 @@ a:hover {
   text-decoration: underline;
 }
 
+#header_link:hover {
+  text-decoration: none;
+}
+
 li.navbar {
   background-color: #700;
   display: inline;
