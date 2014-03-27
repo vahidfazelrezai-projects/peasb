@@ -19,13 +19,6 @@ class Round(models.Model):
             q.save()
             ind += 1
 
-    def delete(self):
-        for question in self.question_set.all():
-            question.problemset = None
-            question.save()
-        super(Round, self).delete()
-
-
 class Subject(models.Model):
     name = models.CharField(max_length=200)
     def __unicode__(self):
@@ -60,7 +53,7 @@ class Question(models.Model):
     # attempts = models.IntegerField(default=0, editable=False)
     # corrects = models.IntegerField(default=0, editable=False)
 
-    problemset = models.ForeignKey(Round, null=True, blank=True)
+    problemset = models.ForeignKey(Round, null=True, blank=True, on_delete=models.SET_NULL)
     # Represents position of Question in its round
     index = models.IntegerField(default=0)
 
