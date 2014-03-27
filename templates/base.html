@@ -18,13 +18,13 @@
     {% block body %}
     {% endblock %}
     <div id="content">
-      <div id="wrapper">
+      <div id="status">
         {% for message in status %}
           {{ message }}
         {% endfor %}
-        {% block content %}
-        {% endblock %}
       </div>
+      {% block content %}
+      {% endblock %}
     </div>
   </body>
 </html>

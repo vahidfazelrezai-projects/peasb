@@ -71,6 +71,11 @@ input[type="submit"]:hover {
   text-decoration: underline;
 }
 
+div#status {
+  line-height: 1.25em;
+  min-height: 1.25em;
+}
+
 /* select from http://cssdeck.com/labs/styling-select-box-with-css3 */
 
 select {
