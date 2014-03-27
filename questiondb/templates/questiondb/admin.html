@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block body %}
+  {% include "navbar.html" %}
+{% endblock %}
+
+{% block content %}
+  <h2>Admin Tools</h2>
+  <ul>
+    <li><a href="/qdb/add_round">Add Round</a></li>
+    <li><a href="/qdb/list_rounds">View Rounds</a></li>
+    <li><a href="/qdb/delete_round">Delete Round</a></li>
+  </ul>
+{% endblock %}
+

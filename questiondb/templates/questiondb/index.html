@@ -5,10 +5,8 @@
 {% endblock %}
 
 {% block content %}
-  <h2>Rounds</h2>
-  <ul>
-    {% for round in rounds %}
-      <li><a href="{{ round.id }}/">{{ round }}</a></li>
-    {% endfor %}
-  </ul>
+  <h2>Welcome!</h2>
+  <p>This is PEA's Scibowl Question Database. We plan to use this website to create rounds of student-written questions for practice. Writing questions is also a great way for you to consolidate new knowledge.</p>
+  <p>You can get started by <a href="/qdb/add_question">adding a question</a>!</p>
+  <p>For questions, suggestions or complaints, please contact one of the coheads.<p>
 {% endblock %}

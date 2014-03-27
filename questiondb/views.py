@@ -11,11 +11,16 @@ from questiondb.models import Round, Question, RoundForm, RoundEditForm, RoundDe
 # Index page. Lists all existing rounds
 @login_required(login_url='/login/')
 def index(request):
+    return render(request, 'questiondb/index.html')
+
+@staff_member_required
+def list_rounds(request):
     rounds = Round.objects.all()
-    return render(request, 'questiondb/index.html', {'rounds': rounds})
+    return render(request, 'questiondb/list_rounds.html', {'rounds': rounds})
 
 # View for viewing round and adding questions to round
-@login_required(login_url='/login/')
+#login_required(login_url='/login/')
+@staff_member_required
 def view_round(request, round_id):
     # List of success/failure messages to return
     status = []
@@ -46,7 +51,8 @@ def view_round(request, round_id):
                   {'form': form, 'round': r, 'status': status})
 
 # View for creating new round
-@login_required(login_url='/login/')
+#login_required(login_url='/login/')
+@staff_member_required
 def add_round(request):
     if request.method == 'POST':
         form = RoundForm(request.POST)
@@ -95,7 +101,7 @@ def add_question(request):
 # View for viewing unassigned questions, supports filtering by subject. 
 # For viewing assigned questions, one should use admin page
 @login_required(login_url='/login/')
-def view_questions(request):
+def list_questions(request):
     subject = None
     if request.method == 'POST':
         form = QuestionSelectForm(request.POST)
@@ -111,7 +117,7 @@ def view_questions(request):
                                             subject=subject).order_by('-pub_date')
         form = QuestionSelectForm(initial={'subject':subject.id})
     return render(request,
-                  'questiondb/view_questions.html',
+                  'questiondb/list_questions.html',
                   {'questions': questions, 'form': form})
 
 @staff_member_required
@@ -130,3 +136,7 @@ def delete_round(request):
     return render(request,
                   'questiondb/delete_round.html',
                   {'form': form, 'status': status})
+
+@staff_member_required
+def admin(request):
+    return render(request, 'questiondb/admin.html')
