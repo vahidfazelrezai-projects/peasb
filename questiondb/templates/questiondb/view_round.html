@@ -5,9 +5,6 @@
 {% endblock %}
 
 {% block content %}
-  {% for message in status %}
-    {{ message }}
-  {% endfor %}
   <h2>{{ round.name }}</h2>
 
   <form method="post" action="">{% csrf_token %}
@@ -15,6 +12,7 @@
     <input type="submit" value="Add">
   </form>
 
+  <br>
   <ol>
     {% for question in round.question_set.all|dictsort:"index" %}
       <center><strong style="text-transform: uppercase;">

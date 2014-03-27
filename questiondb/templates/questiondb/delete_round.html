@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block body %}
+  {% include "navbar.html" %}
+{% endblock %}
+
+{% block content %}
+  <h2>Delete Round</h2>
+  <form method="post" action="">{% csrf_token %}
+    <b>Round ID</b> &nbsp; {{ form.round_id }}
+    <input type="submit" value="Submit">
+  </form>
+{% endblock %}
+

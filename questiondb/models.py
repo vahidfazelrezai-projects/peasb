@@ -8,6 +8,7 @@ class Round(models.Model):
     pub_date = models.DateField(blank=True)
     def __unicode__(self):
         return self.name
+
     def fix(self):
         # fixes question indices
         # for use when adding/deleting questions
@@ -17,6 +18,13 @@ class Round(models.Model):
             q.index = ind
             q.save()
             ind += 1
+
+    def delete(self):
+        for question in self.question_set.all():
+            question.problemset = None
+            question.save()
+        super(Round, self).delete()
+
 
 class Subject(models.Model):
     name = models.CharField(max_length=200)
@@ -95,8 +103,9 @@ class RoundEditForm(forms.ModelForm):
         if not valid:
             return valid
         # Checks if question exists
-        question = Question.objects.get(id=self.cleaned_data['question_id'])
-        if question == None:
+        try:
+            Question.objects.get(id=self.cleaned_data['question_id'])
+        except Question.DoesNotExist:
             return False
         return True
 
@@ -120,6 +129,7 @@ class QuestionForm(forms.ModelForm):
         if self.cleaned_data['difficulty'] == None:
             return False
         return True
+
     class Meta:
         model = Question
         fields = [
@@ -134,3 +144,16 @@ class QuestionForm(forms.ModelForm):
 
 class QuestionSelectForm(forms.Form):
     subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={'onchange': 'this.form.submit();'}))
+
+class RoundDeleteForm(forms.Form):
+    round_id = forms.IntegerField()
+
+    def is_valid(self):
+        valid = super(RoundDeleteForm, self).is_valid()
+        if not valid: 
+            return valid
+        try:
+            Round.objects.get(id=self.cleaned_data['round_id'])
+        except Round.DoesNotExist:
+            return False
+        return True

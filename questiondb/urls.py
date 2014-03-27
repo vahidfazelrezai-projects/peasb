@@ -11,4 +11,5 @@ urlpatterns = patterns(
     url(r'^add_round/?$', views.add_round),
     url(r'^add_question/?$', views.add_question),
     url(r'^view_questions/?$', views.view_questions),
+    url(r'^delete_round/?$', views.delete_round),
 )

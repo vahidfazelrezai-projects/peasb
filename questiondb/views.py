@@ -4,8 +4,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 
-from questiondb.models import Round, Question, RoundForm, RoundEditForm, QuestionForm, QuestionSelectForm
+from questiondb.models import Round, Question, RoundForm, RoundEditForm, RoundDeleteForm, QuestionForm, QuestionSelectForm
 
 # Index page. Lists all existing rounds
 @login_required(login_url='/login/')
@@ -113,3 +114,19 @@ def view_questions(request):
                   'questiondb/view_questions.html',
                   {'questions': questions, 'form': form})
 
+@staff_member_required
+def delete_round(request):
+    status = []
+    if request.method == 'POST':
+        form = RoundDeleteForm(request.POST)
+        if form.is_valid():
+            round_id = form.cleaned_data['round_id']
+            rd = Round.objects.get(id=round_id)
+            rd.delete()
+            status.append('Success!')
+        else:
+            status.append("Something's wrong. :(")
+    form = RoundDeleteForm()
+    return render(request,
+                  'questiondb/delete_round.html',
+                  {'form': form, 'status': status})
