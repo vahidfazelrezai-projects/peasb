@@ -3,7 +3,7 @@ from questiondb.models import Round, Subject, Question
 
 # Creates admin interface for models
 class RoundAdmin(admin.ModelAdmin):
-    fields = ['name', 'author', 'pub_date']
+    fields = ['name', 'author', 'pub_date', 'public']
 
 class QuestionAdmin(admin.ModelAdmin):
     ordering = ['-pub_date']

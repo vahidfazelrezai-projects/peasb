@@ -6,6 +6,7 @@ class Round(models.Model):
     name = models.CharField(max_length=200)
     author = models.ForeignKey(User, blank=True)
     pub_date = models.DateField(blank=True)
+    public = models.BooleanField(default=True)
     def __unicode__(self):
         return self.name
 
@@ -49,9 +50,6 @@ class Question(models.Model):
     citation = models.CharField(max_length=200, blank=True)
     pub_date = models.DateField()
     author = models.ForeignKey(User)
-
-    # attempts = models.IntegerField(default=0, editable=False)
-    # corrects = models.IntegerField(default=0, editable=False)
 
     problemset = models.ForeignKey(Round, null=True, blank=True, on_delete=models.SET_NULL)
     # Represents position of Question in its round

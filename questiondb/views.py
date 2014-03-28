@@ -1,6 +1,6 @@
 import time
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
@@ -13,14 +13,15 @@ from questiondb.models import Round, Question, RoundForm, RoundEditForm, RoundDe
 def index(request):
     return render(request, 'questiondb/index.html')
 
+#@login_required(login_url='/login/')
 @staff_member_required
 def list_rounds(request):
     rounds = Round.objects.all()
     return render(request, 'questiondb/list_rounds.html', {'rounds': rounds})
 
 # View for viewing round and adding questions to round
-#login_required(login_url='/login/')
-@staff_member_required
+@login_required(login_url='/login/')
+#@staff_member_required
 def view_round(request, round_id):
     # List of success/failure messages to return
     status = []
@@ -44,7 +45,12 @@ def view_round(request, round_id):
                 status.append('That question is already in here!')
         else:
             status.append("Something's wrong. :(")
+
     r = get_object_or_404(Round, pk=round_id)
+    # If user is not staff, and round is not public, return 404.
+    if r.public == False and request.user.is_staff == False:
+        raise Http404
+
     form = RoundEditForm(instance=r)
     return render(request,
                   'questiondb/view_round.html',
@@ -140,3 +146,4 @@ def delete_round(request):
 @staff_member_required
 def admin(request):
     return render(request, 'questiondb/admin.html')
+
