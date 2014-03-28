@@ -81,6 +81,7 @@ def add_round(request):
 def add_question(request):
     # List of success/failure messages to return
     status = []
+    form = QuestionForm()
     if request.method == 'POST':
         form = QuestionForm(request.POST)
         if form.is_valid():
@@ -99,7 +100,6 @@ def add_question(request):
             status.append('Success!')
         else:
             status.append("Something's wrong. :(")
-    form = QuestionForm()
     return render(request,
                   'questiondb/add_question.html',
                   {'form': form, 'status': status})
