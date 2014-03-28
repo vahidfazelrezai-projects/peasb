@@ -7,7 +7,7 @@
 {% block content %}
   <h2>New Questions</h2>
   <form method="post" action="">{% csrf_token %}
-    <b>{{ form.subject.label_tag }}</b> &nbsp; <label class="select">{{ form.subject }}</label>
+    {{ form.subject.label_tag }} &nbsp; <label class="select">{{ form.subject }}</label>
   </form>
   <ul>
     <table style="table-layout: fixed;">

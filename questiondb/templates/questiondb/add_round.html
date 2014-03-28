@@ -7,7 +7,7 @@
 {% block content %}
   <h2>Add Round</h2>
   <form method="post" action="">{% csrf_token %}
-      <b>{{ form.name.label_tag }}</b> <br>
+      {{ form.name.label_tag }} <br>
       {{ form.name }} <br>
     <input type="submit" value="Submit">
   </form>
