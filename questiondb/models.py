@@ -134,7 +134,7 @@ class QuestionForm(forms.ModelForm):
         ]
 
 class QuestionSelectForm(forms.Form):
-    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={'onchange': 'this.form.submit();'}))
+    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={'onchange': 'filter();'}))
 
 class RoundDeleteForm(forms.Form):
     round_id = forms.IntegerField()

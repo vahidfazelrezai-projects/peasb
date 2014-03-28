@@ -7,10 +7,10 @@
 {% block content %}
   <h2>New Questions</h2>
   <form method="post" action="">{% csrf_token %}
-    {{ form.subject.label_tag }} &nbsp; <label class="select">{{ form.subject }}</label>
+    {{ form.subject.label_tag }} &nbsp; <label class="select">{{ form.subject }} </label>
   </form>
   <ul>
-    <table style="table-layout: fixed;">
+    <table id="qList" style="table-layout: fixed;">
       <col width="150px" />
       <col width="100px" />
       <col width="400px" />
@@ -20,7 +20,7 @@
         <th>Question</th>
       </tr>
       {% for question in questions %}
-        <tr>
+        <tr class="{{question.subject}}">
           <td valign="top">{{ question.id }}</td>
           <td valign="top" align="center">{{ question.get_difficulty_display }}</td>
           <td valign="top">{{ question.question_type }} {{ question.subject }} {{ question.question_format }} {{ question.question}} </td>
@@ -28,4 +28,16 @@
       {% endfor %}
     </table>
   </ul>
+  <script>
+	function filter() {
+		var sel = document.getElementById("id_subject");
+		var target = sel.options[sel.selectedIndex].text;
+		var t = document.getElementById("qList");
+
+		for (var i = 1; i < t.rows.length; i++) {
+			if (t.rows[i].className === target) t.rows[i].style.display="table-row";
+			else t.rows[i].style.display="none";
+		}
+	}
+	</script>
 {% endblock %}
