@@ -13,6 +13,66 @@ from questiondb.models import Round, Question, RoundForm, RoundEditForm, RoundDe
 def index(request):
     return render(request, 'questiondb/index.html')
 
+# View for adding new question
+@login_required(login_url='/login/')
+def add_question(request):
+    # List of success/failure messages to return
+    status = []
+    form = QuestionForm()
+    if request.method == 'POST':
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            form.instance.author = request.user
+            form.instance.pub_date = timezone.now()
+            form.save()
+            status.append('Success!')
+            form = QuestionForm()
+        else:
+            status.append("Something's wrong. :(")
+    return render(request,
+                  'questiondb/add_question.html',
+                  {'form': form, 'status': status})
+
+@login_required(login_url='/login/')
+def edit_question(request, question_id):
+    status = []
+    question = get_object_or_404(Question, pk=question_id)
+    form = QuestionForm(instance=question);
+    if request.method == 'POST':
+        form = QuestionForm(request.POST, instance=question)
+        if form.is_valid():
+            form.save()
+            status.append('Success!')
+        else:
+            status.append("Something's wrong. :(")
+    if not request.user.is_staff and request.user != question.author:
+        raise Http404
+    return render(request,
+                  'questiondb/edit_question.html',
+                  {'form': form, 'status': status})
+
+# View for viewing unassigned questions, supports filtering by subject. 
+# For viewing assigned questions, one should use admin page
+@login_required(login_url='/login/')
+def list_questions(request):
+    subject = None
+    if request.method == 'POST':
+        form = QuestionSelectForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+    questions = None
+    form = None
+    if subject == None:
+        questions = Question.objects.filter(problemset=None).order_by('-pub_date')
+        form = QuestionSelectForm()
+    else:
+        questions = Question.objects.filter(problemset=None,
+                                            subject=subject).order_by('-pub_date')
+        form = QuestionSelectForm(initial={'subject':subject.id})
+    return render(request,
+                  'questiondb/list_questions.html',
+                  {'questions': questions, 'form': form})
+
 #@login_required(login_url='/login/')
 @staff_member_required
 def list_rounds(request):
@@ -48,7 +108,7 @@ def view_round(request, round_id):
 
     r = get_object_or_404(Round, pk=round_id)
     # If user is not staff, and round is not public, return 404.
-    if r.public == False and request.user.is_staff == False:
+    if not r.public and not request.user.is_staff:
         raise Http404
 
     form = RoundEditForm(instance=r)
@@ -75,57 +135,6 @@ def add_round(request):
     return render(request,
                   'questiondb/add_round.html',
                   {'form': form})
-
-# View for adding new question
-@login_required(login_url='/login/')
-def add_question(request):
-    # List of success/failure messages to return
-    status = []
-    form = QuestionForm()
-    if request.method == 'POST':
-        form = QuestionForm(request.POST)
-        if form.is_valid():
-            q = Question(
-                question_type = form.cleaned_data['question_type'],
-                subject = form.cleaned_data['subject'],
-                question_format = form.cleaned_data['question_format'],
-                question = form.cleaned_data['question'],
-                answer = form.cleaned_data['answer'],
-                citation = form.cleaned_data['citation'],
-                difficulty = form.cleaned_data['difficulty'],
-                author = request.user,
-                pub_date = timezone.now()
-            )
-            q.save()
-            status.append('Success!')
-            form = QuestionForm()
-        else:
-            status.append("Something's wrong. :(")
-    return render(request,
-                  'questiondb/add_question.html',
-                  {'form': form, 'status': status})
-
-# View for viewing unassigned questions, supports filtering by subject. 
-# For viewing assigned questions, one should use admin page
-@login_required(login_url='/login/')
-def list_questions(request):
-    subject = None
-    if request.method == 'POST':
-        form = QuestionSelectForm(request.POST)
-        if form.is_valid():
-            subject = form.cleaned_data['subject']
-    questions = None
-    form = None
-    if subject == None:
-        questions = Question.objects.filter(problemset=None).order_by('-pub_date')
-        form = QuestionSelectForm()
-    else:
-        questions = Question.objects.filter(problemset=None,
-                                            subject=subject).order_by('-pub_date')
-        form = QuestionSelectForm(initial={'subject':subject.id})
-    return render(request,
-                  'questiondb/list_questions.html',
-                  {'questions': questions, 'form': form})
 
 @staff_member_required
 def delete_round(request):

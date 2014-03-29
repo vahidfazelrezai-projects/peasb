@@ -23,7 +23,13 @@
       </tr>
       {% for question in questions %}
         <tr class="{{question.subject}}">
-          <td id="q_table" valign="top">{{ question.id }}</td>
+          <td id="q_table" valign="top">
+            {% if user.is_staff or user == question.author %}
+              <a href="/qdb/edit_question/{{ question.id }}">{{ question.id }}</a>
+            {% else %}
+              {{ question.id }}
+            {% endif %}
+          </td>
           <td id="q_table" valign="top" align="center">{{ question.get_difficulty_display }}</td>
           <td id="q_table" valign="top" align="center">{{ question.question_type }}</td>
           <td id="q_table" valign="top">

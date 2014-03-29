@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <h2>Add Question</h2>
+  <h2>Edit Question</h2>
   <form method="post" action="">{% csrf_token %}
     {{ form.question_type.label_tag }} &nbsp;
     <label class="select">{{ form.question_type }}</label> <br>
@@ -21,6 +21,7 @@
     <label class="select">{{ form.difficulty }}</label> <span style="font-size:0.7em">(Introductory is first year high school, intermediate is second year or AP, advanced is anything harder.)</span> <br>
     {{ form.citation.label_tag }} &nbsp;
     {{ form.citation }} <br>
-    <input type="submit" value="Add">
+    <input type="submit" value="Save">
   </form>
 {% endblock %}
+
