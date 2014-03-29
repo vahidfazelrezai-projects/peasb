@@ -98,6 +98,7 @@ def add_question(request):
             )
             q.save()
             status.append('Success!')
+            form = QuestionForm()
         else:
             status.append("Something's wrong. :(")
     return render(request,

@@ -48,7 +48,7 @@ class Question(models.Model):
     question = models.TextField()
     answer = models.CharField(max_length=200)
     citation = models.CharField(max_length=200, blank=True)
-    pub_date = models.DateField()
+    pub_date = models.DateTimeField()
     author = models.ForeignKey(User)
 
     problemset = models.ForeignKey(Round, null=True, blank=True, on_delete=models.SET_NULL)
