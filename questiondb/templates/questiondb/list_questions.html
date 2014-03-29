@@ -13,17 +13,22 @@
     <table id="q_list" style="table-layout: fixed;">
       <col width="150px" />
       <col width="100px" />
-      <col width="400px" />
+      <col width="100px" />
+      <col width="600px" />
       <tr>
         <th>Question ID</th>
         <th>Difficulty</th>
+        <th>Type</th>
         <th>Question</th>
       </tr>
       {% for question in questions %}
         <tr class="{{question.subject}}">
           <td id="q_table" valign="top">{{ question.id }}</td>
           <td id="q_table" valign="top" align="center">{{ question.get_difficulty_display }}</td>
-          <td id="q_table" valign="top">{{ question.question_type }} {{ question.subject }} {{ question.question_format }} {{ question.question}} <span style="float: right; font-size: 0.8em;">Written by {{ question.author.first_name }} {{ question.author.last_name }}.</span> </td>
+          <td id="q_table" valign="top" align="center">{{ question.question_type }}</td>
+          <td id="q_table" valign="top">
+            {{ question.subject }} <i>{{ question.question_format }}</i>
+            <div style="display: inline; white-space: pre-wrap;">{{ question.question }}</div> <span style="float: right; font-size: 0.8em;">Written by {{ question.author.first_name }} {{ question.author.last_name }}.</span> </td>
         </tr>
       {% endfor %}
     </table>
