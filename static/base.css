@@ -80,6 +80,10 @@ div#status {
   min-height: 1.25em;
 }
 
+#q_table {
+  padding-bottom: 10px;
+}
+
 /* select from http://cssdeck.com/labs/styling-select-box-with-css3 */
 
 select {
