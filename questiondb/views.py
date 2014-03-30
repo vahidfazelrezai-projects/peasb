@@ -9,8 +9,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from questiondb.models import Round, Question
 from questiondb.forms import RoundForm, RoundEditForm, RoundDeleteForm, QuestionForm, QuestionSelectForm
 
-# Index page. Lists all existing rounds
-@login_required(login_url='/login/')
+# Index page. 
 def index(request):
     return render(request, 'questiondb/index.html')
 
