@@ -9,9 +9,11 @@
 
   {% if user.is_staff %}
     <!-- temporarily make rounds only editable by staff -->
-    <form method="post" action="">{% csrf_token %}
-      <b>Question ID</b> &nbsp; {{ form.question_id }}
-      <input type="submit" value="Add">
+    <form method="post" action="" class="form-inline" style="padding-bottom: 10px">{% csrf_token %}
+      <div class="form-group">
+        {{ form.question_id }}
+      </div>
+      <input type="submit" class="btn btn-primary" value="Add">
     </form>
   {% endif %}
 

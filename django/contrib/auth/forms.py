@@ -281,12 +281,12 @@ class SetPasswordForm(forms.Form):
     }
     new_password1 = forms.CharField(
         label=_("New password"),
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password', 'required': '', 'autofocus': ''}),
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password', 'required': ''}),
         max_length=MAXIMUM_PASSWORD_LENGTH,
     )
     new_password2 = forms.CharField(
         label=_("New password confirmation"),
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password Confirmation', 'required': '', 'autofocus': ''}),
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password Confirmation', 'required': ''}),
         max_length=MAXIMUM_PASSWORD_LENGTH,
     )
 

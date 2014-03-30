@@ -6,9 +6,8 @@
 
 {% block content %}
   <h1>Add Round</h1>
-  <form method="post" action="">{% csrf_token %}
-      {{ form.name.label_tag }} <br>
-      {{ form.name }} <br>
-    <input type="submit" value="Submit">
+  <form method="post" action="" style="max-width: 300px">{% csrf_token %}
+    {{ form.name }}
+    <input type="submit" class="btn btn-primary btn-block" value="Add">
   </form>
 {% endblock %}

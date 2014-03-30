@@ -6,9 +6,9 @@
 
 {% block content %}
   <h1>Rounds</h1>
-  <ul>
+  <ul class="list-group">
     {% for round in rounds %}
-      <li><a href="{{ round.id }}/">{{ round }}</a></li>
+      <li class="list-group-item"><a href="{{ round.id }}/">{{ round }}</a></li>
     {% endfor %}
   </ul>
 {% endblock %}
