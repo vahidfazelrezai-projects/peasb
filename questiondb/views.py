@@ -25,10 +25,10 @@ def add_question(request):
             form.instance.author = request.user
             form.instance.pub_date = timezone.now()
             form.save()
-            status.append('Success!')
+            status.append(('Success!', 'label-success'))
             form = QuestionForm()
         else:
-            status.append("Something's wrong. :(")
+            status.append(("Something's wrong. :(", "label-danger"))
     return render(request,
                   'questiondb/add_question.html',
                   {'form': form, 'status': status})
@@ -42,9 +42,9 @@ def edit_question(request, question_id):
         form = QuestionForm(request.POST, instance=question)
         if form.is_valid():
             form.save()
-            status.append('Success!')
+            status.append(('Success!', 'label-success'))
         else:
-            status.append("Something's wrong. :(")
+            status.append(("Something's wrong. :(", "label-danger"))
     if not request.user.is_staff and request.user != question.author:
         raise Http404
     return render(request,
@@ -100,11 +100,11 @@ def view_round(request, round_id):
                 question.save()
                 # Sleep to give database time to update
                 time.sleep(0.1)
-                status.append('Success!')
+                status.append(('Success!', 'label-success'))
             else:
-                status.append('That question is already in here!')
+                status.append(('That question is already in here!', 'label-danger'))
         else:
-            status.append("Something's wrong. :(")
+            status.append(("Something's wrong. :(", "label-danger"))
 
     r = get_object_or_404(Round, pk=round_id)
     # If user is not staff, and round is not public, return 404.
@@ -145,9 +145,10 @@ def delete_round(request):
             round_id = form.cleaned_data['round_id']
             rd = Round.objects.get(id=round_id)
             rd.delete()
-            status.append('Success!')
+            status.append(('Success!', 'label-success'))
+
         else:
-            status.append("Something's wrong. :(")
+            status.append(("Something's wrong. :(", "label-danger"))
     form = RoundDeleteForm()
     return render(request,
                   'questiondb/delete_round.html',

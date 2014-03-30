@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
     <!-- Latest compiled and minified JavaScript -->
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <!-- JQuery -->
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <style> 
       body {
         padding-top: 60px;
@@ -17,15 +21,20 @@
     </style>
     {% block head %}
     {% endblock %}
+    <script>
+      $(document).ready(function () {
+        $(".status").delay(2000).fadeOut("slow");
+      });
+    </script>
   </head>
 
   <body>
     {% block body %}
     {% endblock %}
     <div class="container">
-      <div id="status">
+      <div style="min-height: 2em; margin: 10px">
         {% for message in status %}
-          {{ message }}
+        <h4 align="center" class="status"><span class="label {{ message.1 }}" style="padding: 10px">{{ message.0 }}</span></h4>
         {% endfor %}
       </div>
       {% block content %}
