@@ -132,9 +132,18 @@ class QuestionForm(forms.ModelForm):
             'difficulty',
             'citation'
         ]
+        widgets = {
+            'question_type': forms.Select(attrs={'class': 'form-control'}),
+            'subject': forms.Select(attrs={'class': 'form-control'}),
+            'question_format': forms.Select(attrs={'class': 'form-control'}),
+            'question': forms.Textarea(attrs={'class': 'form-control'}),
+            'answer': forms.TextInput(attrs={'class': 'form-control'}),
+            'difficulty': forms.Select(attrs={'class': 'form-control'}),
+            'citation': forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
 class QuestionSelectForm(forms.Form):
-    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={'onchange': 'filter();'}))
+    subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={'onchange': 'filter()', 'class': 'form-control'}))
 
 class RoundDeleteForm(forms.Form):
     round_id = forms.IntegerField()

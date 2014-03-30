@@ -1,4 +1,18 @@
 {% extends "base.html" %}
+{% block head %}
+  <style>
+    .form-control {
+      position: relative;
+      height: auto;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      padding: 5px;
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+  </style>
+{% endblock %}
 {% block body %}
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
@@ -19,20 +33,12 @@
     </div>
   </div>
 {% endblock %}
+
 {% block content %}
-  <br>
-  <h2>Login</h2>
-  <form method="post" action="">{% csrf_token %}
-    <table>
-      <tr>
-        <th>{{ form.username.label_tag }}</th>
-        <td>{{ form.username }}</td>
-      </tr>
-      <tr>
-        <th>{{ form.password.label_tag }}</th>
-        <td>{{ form.password }}</td>
-      </tr>
-    </table>
-    <input type="submit" value="Submit">
+  <h1>Login</h1>
+  <form method="post" action="" style="max-width: 300px" role="form">{% csrf_token %}
+    {{ form.username }}
+    {{ form.password }}
+    <input type="submit" class="btn btn-primary btn-block" value="Sign in">
   </form>
 {% endblock %}

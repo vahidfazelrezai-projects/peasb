@@ -1,20 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PEA Scibowl Question Database</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-
     <!-- Optional theme -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-
     <!-- Latest compiled and minified JavaScript -->
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <!--
-    <script type="text/javascript"
-      src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-      </script>-->
     <style> 
       body {
         padding-top: 60px;
@@ -25,20 +20,16 @@
   </head>
 
   <body>
+    {% block body %}
+    {% endblock %}
     <div class="container">
-      {% block body %}
-      {% endblock %}
-    </div>
-    <div class="container">
-      <div class="starter-template">
-        <div id="status">
-          {% for message in status %}
-            {{ message }}
-          {% endfor %}
-        </div>
-        {% block content %}
-        {% endblock %}
+      <div id="status">
+        {% for message in status %}
+          {{ message }}
+        {% endfor %}
       </div>
+      {% block content %}
+      {% endblock %}
     </div>
   </body>
 </html>

@@ -147,10 +147,13 @@ class AuthenticationForm(forms.Form):
     Base class for authenticating users. Extend this to get a form that accepts
     username/password logins.
     """
-    username = forms.CharField(max_length=254)
+    username = forms.CharField(
+        max_length=254,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username', 'required': '', 'autofocus': ''}),
+    )
     password = forms.CharField(
         label=_("Password"),
-        widget=forms.PasswordInput,
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password', 'required': ''}),
         max_length=MAXIMUM_PASSWORD_LENGTH,
     )
 
@@ -278,12 +281,12 @@ class SetPasswordForm(forms.Form):
     }
     new_password1 = forms.CharField(
         label=_("New password"),
-        widget=forms.PasswordInput,
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password', 'required': '', 'autofocus': ''}),
         max_length=MAXIMUM_PASSWORD_LENGTH,
     )
     new_password2 = forms.CharField(
         label=_("New password confirmation"),
-        widget=forms.PasswordInput,
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password Confirmation', 'required': '', 'autofocus': ''}),
         max_length=MAXIMUM_PASSWORD_LENGTH,
     )
 
@@ -318,7 +321,7 @@ class PasswordChangeForm(SetPasswordForm):
     })
     old_password = forms.CharField(
         label=_("Old password"),
-        widget=forms.PasswordInput,
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Old Password', 'required': '', 'autofocus': ''}),
         max_length=MAXIMUM_PASSWORD_LENGTH,
     )
 
