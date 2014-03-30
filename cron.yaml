@@ -1,1 +1,5 @@
 cron:
+- description: Daily Backup
+  url: /_ah/datastore_admin/backup.create?name=cron&kind=auth_user&kind=django_admin_log&kind=django_content_type&kind=django_session&kind=permission_backend_nonrel_userpermissionlist&kind=questiondb_question&kind=questiondb_round&kind=questiondb_subject
+  schedule: every 24 hours
+  target: ah-builtin-python-bundle
