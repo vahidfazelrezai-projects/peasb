@@ -42,9 +42,9 @@
   </table>
   <script>
     function filter() {
-      var sel = document.getElementById("id_subject");
+      var sel = $("#id_subject");
       var target = sel.options[sel.selectedIndex].text;
-      var t = document.getElementById("q_list");
+      var t = $("#q_list");
 
       for (var i = 1; i < t.rows.length; i++) {
         if (t.rows[i].className === target || target === "---------") t.rows[i].style.display="table-row";
