@@ -24,3 +24,10 @@ form.form-inline input.form-control {
 table tr td:empty {
   min-width: 10px;
 }
+
+.status_wrapper {
+  position: absolute;
+  top: 60px;
+  left: 0px;
+  width: 100%;
+}

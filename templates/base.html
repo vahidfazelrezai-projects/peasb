@@ -40,11 +40,11 @@
     {% block body %}
     {% endblock %}
     <div class="container">
-      <div style="min-height: 2em; margin: 10px">
+      <span class="status_wrapper">
         {% for message in status %}
         <h4 align="center" class="status"><span class="label {{ message.1 }}" style="padding: 10px">{{ message.0 }}</span></h4>
         {% endfor %}
-      </div>
+      </span>
       {% block content %}
       {% endblock %}
     </div>
