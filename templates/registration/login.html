@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Login</h1>
+  <div class="page-header"><h1>Login</h1></div>
   <form method="post" action="" style="max-width: 300px" role="form">{% csrf_token %}
     {{ form.username }}
     {{ form.password }}

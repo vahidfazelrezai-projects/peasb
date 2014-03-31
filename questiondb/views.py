@@ -55,20 +55,8 @@ def edit_question(request, question_id):
 # For viewing assigned questions, one should use admin page
 @login_required(login_url='/login/')
 def list_questions(request):
-    subject = None
-    if request.method == 'POST':
-        form = QuestionSelectForm(request.POST)
-        if form.is_valid():
-            subject = form.cleaned_data['subject']
-    questions = None
-    form = None
-    if subject == None:
-        questions = Question.objects.filter(problemset=None).order_by('-pub_date')
-        form = QuestionSelectForm()
-    else:
-        questions = Question.objects.filter(problemset=None,
-                                            subject=subject).order_by('-pub_date')
-        form = QuestionSelectForm(initial={'subject':subject.id})
+    questions = Question.objects.filter(problemset=None).order_by('-pub_date')
+    form = QuestionSelectForm()
     return render(request,
                   'questiondb/list_questions.html',
                   {'questions': questions, 'form': form})

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <h1>{{ round.name }}</h1>
+  <div class="page-header"><h1>{{ round.name }}</h1></div>
 
   {% if user.is_staff %}
     <!-- temporarily make rounds only editable by staff -->

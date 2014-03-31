@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Delete Round</h1>
+  <div class="page-header"><h1>Delete Round</h1></div>
   <form method="post" action="" style="max-width: 300px">{% csrf_token %}
     {{ form.round_id }}
     <input type="submit" class="btn btn-primary btn-block" value="Delete">

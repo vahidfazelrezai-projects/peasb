@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Rounds</h1>
+  <div class="page-header"><h1>Rounds</h1></div>
   <ul class="list-group">
     {% for round in rounds %}
       <li class="list-group-item"><a href="{{ round.id }}/">{{ round }}</a></li>

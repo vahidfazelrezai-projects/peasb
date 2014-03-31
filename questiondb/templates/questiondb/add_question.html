@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Add Question</h1>
+  <div class="page-header"><h1>Add Question</h1></div>
   <form method="post" action="" class="form" style="max-width: 500px; margin-bottom: 30px">{% csrf_token %}
     <div class="form-group">
       {{ form.question_type.label_tag }}
