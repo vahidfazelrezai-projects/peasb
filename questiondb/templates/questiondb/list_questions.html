@@ -12,34 +12,48 @@
       {{ form.subject }}
     </div>
   </form>
-  <table id="q_list" style="table-layout: fixed; margin-left: 25px;">
-    <col width="150px" />
-    <col width="100px" />
-    <col width="70px" />
-    <col width="750px" />
-    <tr>
-      <th>Question ID</th>
-      <th>Difficulty</th>
-      <th>Type</th>
-      <th>Question</th>
-    </tr>
-    {% for question in questions %}
-      <tr class="{{question.subject}}">
-        <td valign="top">
-          {% if user.is_staff or user == question.author %}
-            <a href="/qdb/edit_question/{{ question.id }}">{{ question.id }}</a>
-          {% else %}
-            {{ question.id }}
-          {% endif %}
-        </td>
-        <td valign="top">{{ question.get_difficulty_display }}</td>
-        <td valign="top">{{ question.question_type }}</td>
-        <td style="padding-bottom: 10px;" valign="top">
-          {{ question.subject }} <i>{{ question.question_format }}</i>
-          <div style="display: inline; white-space: pre-wrap;">{{ question.question }}</div> <span style="float: right; font-size: 0.8em;">Written by {{ question.author.first_name }} {{ question.author.last_name }}.</span> </td>
+  <div class="table-responsive">
+    <table id="q_list" style="table-layout: fixed; margin-left: 25px;">
+      <col width="140px" />
+      <col width="10px" />
+      <col width="90px" />
+      <col width="10px" />
+      <col width="60px" />
+      <col width="10px" />
+      <col width="750px" />
+      <col width="10px" />
+      <tr>
+        <th>Question ID</th>
+        <th></th>
+        <th>Difficulty</th>
+        <th></th>
+        <th>Type</th>
+        <th></th>
+        <th>Question</th>
+        <th></th>
       </tr>
-    {% endfor %}
-  </table>
+      {% for question in questions %}
+        <tr class="{{question.subject}}">
+          <td valign="top">
+            {% if user.is_staff or user == question.author %}
+              <a href="/qdb/edit_question/{{ question.id }}">{{ question.id }}</a>
+            {% else %}
+              {{ question.id }}
+            {% endif %}
+          </td>
+          <td></td>
+          <td valign="top">{{ question.get_difficulty_display }}</td>
+          <td></td>
+          <td valign="top">{{ question.question_type }}</td>
+          <td></td>
+          <td style="padding-bottom: 10px; min-width: 275px;" valign="top">
+            {{ question.subject }} <i>{{ question.question_format }}</i>
+            <div style="display: inline; white-space: pre-wrap;">{{ question.question }}</div> <span style="float: right; font-size: 0.8em;">Written by {{ question.author.first_name }} {{ question.author.last_name }}.</span> </td>
+          <td></td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
   <script>
     function filter() {
       var sel = $("#id_subject")[0];
