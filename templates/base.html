@@ -24,6 +24,11 @@
     </style>
     {% block head %}
     {% endblock %}
+
+    <!-- MathJax -->
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <!-- Fades status messages -->
     <script>
       $(document).ready(function () {
         $(".status").delay(2000).fadeOut("slow");
