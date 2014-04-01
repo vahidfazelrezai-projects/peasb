@@ -146,3 +146,9 @@ def delete_round(request):
 def admin(request):
     return render(request, 'questiondb/admin.html')
 
+@staff_member_required
+def mod(request, round_id):
+    r = get_object_or_404(Round, pk=round_id)
+    return render(request,
+                  'questiondb/mod.html',
+                  {'round': r})
