@@ -69,7 +69,6 @@ def list_rounds(request):
 
 # View for viewing round and adding questions to round
 @login_required(login_url='/login/')
-#@staff_member_required
 def view_round(request, round_id):
     # List of success/failure messages to return
     status = []
@@ -146,9 +145,11 @@ def delete_round(request):
 def admin(request):
     return render(request, 'questiondb/admin.html')
 
-@staff_member_required
+@login_required(login_url='/login/')
 def mod(request, round_id):
     r = get_object_or_404(Round, pk=round_id)
+    if not r.public and not request.user.is_staff:
+        raise Http404
     return render(request,
                   'questiondb/mod.html',
                   {'round': r})
