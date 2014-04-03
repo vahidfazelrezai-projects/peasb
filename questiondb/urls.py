@@ -13,6 +13,8 @@ urlpatterns = patterns(
     url(r'^add_round/?$', views.add_round),
     url(r'^list_rounds/?$', views.list_rounds),
     url(r'^list_questions/?$', views.list_questions),
+    url(r'^list_all_questions/?$', views.list_all_questions),
+    url(r'^list_my_questions/?$', views.list_my_questions),
     url(r'^delete_round/?$', views.delete_round),
     url(r'^admin/?$', views.admin),
 )

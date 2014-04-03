@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <div class="page-header"><h1>New Questions</h1></div>
+  <div class="page-header"><h1>{{ adj }} Questions</h1></div>
   <form method="post" action="" class="form-inline" style="padding-bottom: 10px">{% csrf_token %}
     <div class="form-group">
       {{ form.subject.label_tag }} &nbsp;

@@ -55,11 +55,27 @@ def edit_question(request, question_id):
 # For viewing assigned questions, one should use admin page
 @login_required(login_url='/login/')
 def list_questions(request):
+    questions = Question.objects.filter(problemset=None).order_by('-pub_date')[:10]
+    form = QuestionSelectForm()
+    return render(request,
+                  'questiondb/list_questions.html',
+                  {'questions': questions, 'form': form, 'adj': 'New'})
+
+@login_required(login_url='/login/')
+def list_my_questions(request):
+    questions = Question.objects.filter(author=request.user).order_by('-pub_date')
+    form = QuestionSelectForm()
+    return render(request,
+                  'questiondb/list_questions.html',
+                  {'questions': questions, 'form': form, 'adj': 'My'})
+
+@staff_member_required
+def list_all_questions(request):
     questions = Question.objects.filter(problemset=None).order_by('-pub_date')
     form = QuestionSelectForm()
     return render(request,
                   'questiondb/list_questions.html',
-                  {'questions': questions, 'form': form})
+                  {'questions': questions, 'form': form, 'adj': 'All'})
 
 #@login_required(login_url='/login/')
 @staff_member_required
