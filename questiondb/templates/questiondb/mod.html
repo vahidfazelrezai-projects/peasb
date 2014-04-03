@@ -25,27 +25,65 @@
 {% block footer %}
   <div id="footer">
     <div class="container">
-      <button id="tossup" class="btn" style="margin-top: 12px; width: 70px;">
+      <button id="tossup" class="btn" style="margin-top: 12px; width: 75px;">
         Toss up
+      </button>
+      <button id="bonus" class="btn" style="margin-top: 12px; width: 75px;">
+        Bonus
       </button>
     </div>
   </div>
   <script> 
-    var instance = 0;
-    function go(t, inst){
-      if(instance == inst){
+    var t_instance = 0, b_instance = 0;
+    function t_go(t, inst){
+      if(t_instance == inst){
         if(t > 0){
           $( "#tossup" ).text(t);
-          setTimeout(function(){go(t-1, inst)}, 1000);
+          $( "#tossup" ).removeClass("btn-danger")
+          setTimeout(function(){t_go(t-1, inst)}, 1000);
         } else {
           $( "#tossup" ).text("TIME!");
-          setTimeout(function(){$( "#tossup" ).text("Toss up")}, 2000);
+          $( "#tossup" ).addClass("btn-danger")
+          setTimeout(function(){
+            if(t_instance == inst){
+              $( "#tossup" ).text("Toss up")
+              $( "#tossup" ).removeClass("btn-danger")
+            }
+          }, 2000);
         }
       }
     }
-    $( "#tossup" ).click(function( event ) {
-      instance++;
-      go(5, instance);
+    function b_go(t, inst){
+      if(b_instance == inst){
+        if(t > 0){
+          $( "#bonus" ).text(t);
+          setTimeout(function(){b_go(t-1, inst)}, 1000);
+          $( "#bonus" ).removeClass("btn-danger")
+          if(t <= 5){
+            $( "#bonus" ).addClass("btn-warning");
+          } else {
+            $( "#bonus" ).removeClass("btn-warning")
+          }
+        } else {
+          $( "#bonus" ).text("TIME!");
+          $( "#bonus" ).removeClass("btn-warning")
+          $( "#bonus" ).addClass("btn-danger")
+          setTimeout(function(){
+            if(b_instance == inst){
+              $( "#bonus" ).text("Bonus")
+              $( "#bonus" ).removeClass("btn-danger")
+            }
+          }, 2000);
+        }
+      }
+    }
+    $( "#tossup" ).click(function() {
+      t_instance++;
+      t_go(5, t_instance);
+    });
+    $( "#bonus" ).click(function() {
+      b_instance++;
+      b_go(20, b_instance);
     });
   </script> 
 {% endblock %}
