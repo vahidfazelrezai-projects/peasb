@@ -17,4 +17,5 @@ urlpatterns = patterns(
     url(r'^list_my_questions/?$', views.list_my_questions),
     url(r'^delete_round/?$', views.delete_round),
     url(r'^admin/?$', views.admin),
+    url(r'^(?P<round_id>\d+)/mod/?$', views.mod),
 )

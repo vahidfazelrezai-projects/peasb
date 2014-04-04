@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block content %}
-  <div class="page-header"><h1>{{ round.name }}</h1></div>
+  <div class="page-header"><h1>{{ round.name }}
+  <button class="btn btn-primary pull-right" onclick="location.href='mod'">Mod</button>
+</h1></div>
 
   {% if user.is_staff %}
     <!-- temporarily make rounds only editable by staff -->

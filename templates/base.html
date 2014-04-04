@@ -10,20 +10,11 @@
     
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
     <!-- Latest compiled and minified JavaScript -->
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
     <!-- CSS -->
     <link rel="stylesheet" href="/static/base.css">
-    <style> 
-      body {
-        padding-top: 60px;
-      }
-    </style>
-    {% block head %}
-    {% endblock %}
 
     <!-- MathJax -->
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -34,6 +25,9 @@
         $(".status").delay(2000).fadeOut("slow");
       });
     </script>
+
+    {% block head %}
+    {% endblock %}
   </head>
 
   <body>
@@ -48,5 +42,7 @@
       {% block content %}
       {% endblock %}
     </div>
+    {% block footer %}
+    {% endblock %}
   </body>
 </html>
