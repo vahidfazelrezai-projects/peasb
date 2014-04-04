@@ -5,6 +5,74 @@
 {% endblock %}
 
 {% block content %}
+  <style>
+    .el {
+      position: relative;
+    }
+    .res {
+      position: absolute;
+      left: -65px;
+      display: inline-block;
+    }
+    .sc {
+      margin: 0px;
+      padding: 0px;
+      min-width: 0px;
+      width: 30px; 
+    }
+    div.pt {
+      margin: 5px;
+      min-width: 60px;
+      display: inline-block;
+    }
+    h3.pt {
+      margin-top: 12px;
+    }
+  </style>
+  <div id="team" class="btn-group-sm">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu sc">
+      <li style="background-color: white" class="sel white">&nbsp;</li>
+      <li style="background-color: #D2322D" class="sel red">&nbsp;</li>
+      <li style="background-color: #3276B1" class="sel blue">&nbsp;</li>
+    </ul>
+  </div>
+  <script> 
+    function go(){
+      var sc = [0, 0, 0];
+      $( ".sc" ).each(function(){
+        var val = 4;
+        if($( this ).parent().parent().parent().hasClass("Bonus")) val = 10;
+        sc[$( this ).data("team")] += val;
+      });
+      $( "#rp" ).html(sc[1]);
+      $( "#bp" ).html(sc[2]);
+    }
+    $( document ).ready(function() {
+      $( ".res" ).append( $( "#team" ) );
+      $( ".sc" ).data("team", 0);
+      $( ".sel" ).click(function() {
+        var btn = $( this ).parent().parent().find(".btn");
+        if($( this ).hasClass("white")){
+          $( this ).parent().data("team", 0);
+          btn.removeClass("btn-primary");
+          btn.removeClass("btn-danger");
+        } else if($( this ).hasClass("red")){
+          $( this ).parent().data("team", 1);
+          btn.removeClass("btn-primary");
+          btn.addClass("btn-danger");
+        } else {
+          $( this ).parent().data("team", 2);
+          btn.removeClass("btn-danger");
+          btn.addClass("btn-primary");
+        }
+        go();
+      });
+    });
+  </script> 
+
   <div class="page-header"><h1>{{ round.name }}</h1></div>
   <br>
   <ol>
@@ -12,7 +80,7 @@
       <center><strong style="text-transform: uppercase;">
           {{ question.question_type }}
       </strong></center> <br>
-      <li>
+      <li class="el {{ question.question_type }}"><div class="res"></div>
         {{ question.subject }} <i>{{ question.question_format }}</i>
         <div style="display: inline; white-space: pre-wrap;">{{ question.question }}</div> <span style="float: right; font-size: 0.8em;">Written by {{ question.author.first_name }} {{ question.author.last_name }}.</span> <br> <br>
         ANSWER: {{ question.answer }}<br>
@@ -31,6 +99,8 @@
       <button id="bonus" class="btn" style="margin-top: 12px; width: 75px;">
         Bonus
       </button>
+      <h3 class="pt pull-right"><div id="rp" class="label label-danger pt">0</div></h3>
+      <h3 class="pt pull-right"><div id="bp" class="label label-primary pt">0</div></h3>
     </div>
   </div>
   <script> 
