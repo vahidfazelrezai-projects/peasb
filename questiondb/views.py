@@ -111,8 +111,10 @@ def view_round(request, round_id):
 
     r = get_object_or_404(Round, pk=round_id)
     # If user is not staff, and round is not public, return 404.
-    if not r.public and not request.user.is_staff:
-        raise Http404
+    if not request.user.is_staff:
+        if not r.public:
+            raise Http404
+        return HttpResponseRedirect('mod')
 
     form = RoundEditForm(instance=r)
     return render(request,

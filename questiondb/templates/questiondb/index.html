@@ -2,11 +2,12 @@
 
 {% block body %}
   {% include "navbar.html" %}
-{% endblock %}
-
-{% block content %}
-  <div class="page-header"><h1>Welcome!</h1></div>
-  <p>This is PEA's Scibowl Question Database. We plan to use this website to create rounds of student-written questions for practice. Writing questions is also a great way for you to consolidate new knowledge.</p>
-  <p>You can get started by <a href="/qdb/add_question">adding a question</a>!</p>
-  <p>For questions, suggestions or complaints, please contact one of the coheads.<p>
+<div class="jumbotron">
+  <div class="container">
+    <h1>Welcome!</h1>
+    <p>This is PEA Scibowl's Question Database. The goal of this website is to collect rounds of student-written questions. Contribute, because writing questions is a great way for you to consolidate new knowledge.</p>
+    <p>Get started by <a href="/qdb/add_question">adding a question</a>!</p>
+    <p>For questions, suggestions or complaints, please contact one of the coheads.<p>
+  </div>
+</div>
 {% endblock %}

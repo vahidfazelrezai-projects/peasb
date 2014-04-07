@@ -8,15 +8,16 @@
   <style>
     .el {
       position: relative;
+      margin-left: 65px;
     }
     .res {
       position: absolute;
-      left: -65px;
+      top: -6px;
+      left: -100px;
       display: inline-block;
     }
-    .sc {
-      margin: 0px;
-      padding: 0px;
+    .sc, .pen {
+      padding-bottom: 0px;
       min-width: 0px;
       width: 30px; 
     }
@@ -28,24 +29,60 @@
     h3.pt {
       margin-top: 12px;
     }
+    .btn-purple {
+      background-color: #82546F;
+      border-color: #82546F;
+      color: #FFF;
+    }
+    .btn-purple:hover,
+    .btn-purple:focus,
+    .btn-purple:active,
+    .btn-purple.active {
+      background-color: #734a62;
+      border-color: #634055;
+      color: #FFF;
+    }
   </style>
-  <div id="team" class="btn-group-sm">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu sc">
-      <li style="background-color: white" class="sel white">&nbsp;</li>
-      <li style="background-color: #D2322D" class="sel red">&nbsp;</li>
-      <li style="background-color: #3276B1" class="sel blue">&nbsp;</li>
-    </ul>
+  <div id="team" class="btn-group">
+    <div class="btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        P
+      </button>
+      <ul class="dropdown-menu pen">
+        <li style="background-color: white" class="sel white">&nbsp;</li>
+        <li style="background-color: #D2322D" class="sel red">&nbsp;</li>
+        <li style="background-color: #3276B1" class="sel blue">&nbsp;</li>
+        <li style="background-color: #82546F" class="sel purple">&nbsp;</li>
+      </ul>
+    </div>
+    <div class="btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu sc">
+        <li style="background-color: white" class="sel white">&nbsp;</li>
+        <li style="background-color: #D2322D" class="sel red">&nbsp;</li>
+        <li style="background-color: #3276B1" class="sel blue">&nbsp;</li>
+      </ul>
+    </div>
   </div>
   <script> 
-    function go(){
+    function calc(){
       var sc = [0, 0, 0];
       $( ".sc" ).each(function(){
         var val = 4;
-        if($( this ).parent().parent().parent().hasClass("Bonus")) val = 10;
+        if($( this ).parent().parent().parent().parent().hasClass("Bonus")) val = 10;
         sc[$( this ).data("team")] += val;
+      });
+      $( ".pen" ).each(function(){
+        var val = 4;
+        if($( this ).parent().parent().parent().parent().hasClass("Bonus")) val = 10;
+        var t = $( this ).data("team");
+        if(t == 1 || t == 2) sc[t] += val;
+        if(t == 3){
+          sc[1] += val;
+          sc[2] += val;
+        }
       });
       $( "#rp" ).html(sc[1]);
       $( "#bp" ).html(sc[2]);
@@ -59,16 +96,24 @@
           $( this ).parent().data("team", 0);
           btn.removeClass("btn-primary");
           btn.removeClass("btn-danger");
+          btn.removeClass("btn-purple");
         } else if($( this ).hasClass("red")){
           $( this ).parent().data("team", 1);
           btn.removeClass("btn-primary");
           btn.addClass("btn-danger");
-        } else {
+          btn.removeClass("btn-purple");
+        } else if($( this ).hasClass("blue")){
           $( this ).parent().data("team", 2);
           btn.removeClass("btn-danger");
           btn.addClass("btn-primary");
+          btn.removeClass("btn-purple");
+        } else {
+          $( this ).parent().data("team", 3);
+          btn.removeClass("btn-danger");
+          btn.removeClass("btn-primary");
+          btn.addClass("btn-purple");
         }
-        go();
+        calc();
       });
     });
   </script> 
@@ -112,7 +157,7 @@
           $( "#tossup" ).removeClass("btn-danger")
           setTimeout(function(){t_go(t-1, inst)}, 1000);
         } else {
-          $( "#tossup" ).text("TIME!");
+          $( "#tossup" ).text("TIME");
           $( "#tossup" ).addClass("btn-danger")
           setTimeout(function(){
             if(t_instance == inst){
@@ -135,7 +180,7 @@
             $( "#bonus" ).removeClass("btn-warning")
           }
         } else {
-          $( "#bonus" ).text("TIME!");
+          $( "#bonus" ).text("TIME");
           $( "#bonus" ).removeClass("btn-warning")
           $( "#bonus" ).addClass("btn-danger")
           setTimeout(function(){

@@ -1,5 +1,5 @@
 body {
-  padding-top: 60px;
+  padding-top: 50px;
   padding-bottom: 20px;
 }
 
@@ -46,3 +46,5 @@ table tr td:empty {
   z-index: 100;
 }
 
+.jumbotron {
+}
