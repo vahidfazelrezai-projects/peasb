@@ -42,6 +42,21 @@
       border-color: #634055;
       color: #FFF;
     }
+    .btn-purple.disabled:hover,
+    .btn-purple.disabled:focus,
+    .btn-purple.disabled:active,
+    .btn-purple.disabled.active,
+    .btn-purple[disabled]:hover,
+    .btn-purple[disabled]:focus,
+    .btn-purple[disabled]:active,
+    .btn-purple[disabled].active,
+    fieldset[disabled] .btn-purple:hover,
+    fieldset[disabled] .btn-purple:focus,
+    fieldset[disabled] .btn-purple:active,
+    fieldset[disabled] .btn-purple.active {
+      background-color: #82546F;
+      border-color: #82546F;
+    }
   </style>
   <div id="team" class="btn-group">
     <div class="btn-group">
@@ -94,21 +109,25 @@
         var btn = $( this ).parent().parent().find(".btn");
         if($( this ).hasClass("white")){
           $( this ).parent().data("team", 0);
+          btn.addClass("btn-default");
           btn.removeClass("btn-primary");
           btn.removeClass("btn-danger");
           btn.removeClass("btn-purple");
         } else if($( this ).hasClass("red")){
           $( this ).parent().data("team", 1);
+          btn.removeClass("btn-default");
           btn.removeClass("btn-primary");
           btn.addClass("btn-danger");
           btn.removeClass("btn-purple");
         } else if($( this ).hasClass("blue")){
           $( this ).parent().data("team", 2);
+          btn.removeClass("btn-default");
           btn.removeClass("btn-danger");
           btn.addClass("btn-primary");
           btn.removeClass("btn-purple");
         } else {
           $( this ).parent().data("team", 3);
+          btn.removeClass("btn-default");
           btn.removeClass("btn-danger");
           btn.removeClass("btn-primary");
           btn.addClass("btn-purple");
