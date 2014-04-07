@@ -18,6 +18,9 @@
           <ul class="dropdown-menu">
             <li><a href="/qdb/list_questions">New Questions</a></li>
             <li><a href="/qdb/list_my_questions">My Questions</a></li>
+            {% if user.is_staff %}
+            <li><a href="/qdb/list_all_questions">All Questions</a></li>
+            {% endif %}
           </ul>
         </li>
         <li><a href="/password_change">Change Password</a></li>

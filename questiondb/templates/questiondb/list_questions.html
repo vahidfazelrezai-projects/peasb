@@ -11,6 +11,7 @@
       {{ form.subject.label_tag }} &nbsp;
       {{ form.subject }}
     </div>
+    <div class="pull-right count" style="padding-top: 6px"></div>
   </form>
   <div class="table-responsive">
     <table id="q_list" style="table-layout: fixed; margin-left: 25px;">
@@ -20,8 +21,7 @@
       <col width="10px" />
       <col width="60px" />
       <col width="10px" />
-      <col width="750px" />
-      <col width="10px" />
+      <col width="770px" />
       <tr>
         <th>Question ID</th>
         <th></th>
@@ -59,11 +59,17 @@
       var sel = $("#id_subject")[0];
       var target = sel.options[sel.selectedIndex].text;
       var t = $("#q_list")[0];
+      var count = 0;
 
       for (var i = 1; i < t.rows.length; i++) {
-        if (t.rows[i].className === target || target === "---------") t.rows[i].style.display="table-row";
-        else t.rows[i].style.display="none";
+        if (t.rows[i].className === target || target === "---------"){
+          t.rows[i].style.display="table-row";
+          count++;
+        } else {
+          t.rows[i].style.display="none";
+        }
       }
+      $( ".count" ).html(count + " questions");
     }
     window.onload = filter();
   </script>
