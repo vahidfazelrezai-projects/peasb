@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 
 from questiondb.models import Round, Question
-from questiondb.forms import RoundForm, RoundEditForm, RoundDeleteForm, QuestionForm, QuestionSelectForm
+from questiondb.forms import RoundForm, RoundEditForm, RoundDeleteForm, QuestionForm, QuestionSelectForm, RoundOrderForm
 
 # Index page. 
 def index(request):
@@ -159,10 +159,6 @@ def delete_round(request):
                   'questiondb/delete_round.html',
                   {'form': form, 'status': status})
 
-@staff_member_required
-def admin(request):
-    return render(request, 'questiondb/admin.html')
-
 @login_required(login_url='/login/')
 def mod(request, round_id):
     r = get_object_or_404(Round, pk=round_id)
@@ -171,3 +167,31 @@ def mod(request, round_id):
     return render(request,
                   'questiondb/mod.html',
                   {'round': r})
+
+@login_required(login_url='/login/')
+def edit_round(request, round_id):
+    # List of success/failure messages to return
+    status = []
+    if request.method == 'POST':
+        form = RoundOrderForm(request.POST)
+        if form.is_valid():
+            question_list = form.cleaned_data['question_list'].split(',')
+            question_list = map(int, question_list)
+            count = 0;
+            for qid in question_list:
+                question = Question.objects.get(pk=qid)
+                question.index = count
+                count += 1
+                question.save()
+
+    r = get_object_or_404(Round, pk=round_id)
+    # If user is not staff, and round is not public, return 404.
+    if not request.user.is_staff:
+        if not r.public:
+            raise Http404
+        return HttpResponseRedirect('mod')
+
+    form = RoundOrderForm()
+    return render(request,
+                  'questiondb/edit_round.html',
+                  {'form': form, 'round': r, 'status': status})

@@ -8,6 +8,8 @@ urlpatterns = patterns(
     url(r'^$', views.index, name='index'),
     # Maps urls of the form /qdb/round_id to page displaying the round.
     url(r'^(?P<round_id>\d+)/?$', views.view_round), 
+    url(r'^(?P<round_id>\d+)/edit/?$', views.edit_round), 
+    url(r'^(?P<round_id>\d+)/mod/?$', views.mod),
     url(r'^add_question/?$', views.add_question),
     url(r'^edit_question/(?P<question_id>\d+)/?$', views.edit_question),
     url(r'^add_round/?$', views.add_round),
@@ -16,6 +18,4 @@ urlpatterns = patterns(
     url(r'^list_all_questions/?$', views.list_all_questions),
     url(r'^list_my_questions/?$', views.list_my_questions),
     url(r'^delete_round/?$', views.delete_round),
-    url(r'^admin/?$', views.admin),
-    url(r'^(?P<round_id>\d+)/mod/?$', views.mod),
 )

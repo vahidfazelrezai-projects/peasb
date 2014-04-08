@@ -6,7 +6,12 @@
 
 {% block content %}
   <div class="page-header"><h1>{{ round.name }}
-  <button class="btn btn-primary pull-right" onclick="location.href='mod'">Mod</button>
+  <div class="btn-group pull-right">
+    {% if user.is_staff %}
+        <a href="edit" class="btn btn-default">Edit</a>
+    {% endif %}
+    <a href="mod" class="btn btn-default">Mod</a>
+  </div>
 </h1></div>
 
   {% if user.is_staff %}
@@ -22,9 +27,12 @@
   <br>
   <ol>
     {% for question in round.question_set.all|dictsort:"index" %}
-      <center><strong style="text-transform: uppercase;">
-          {{ question.question_type }}
-      </strong></center> <br>
+      <center>
+        <strong style="text-transform: uppercase;">
+            {{ question.question_type }}
+        </strong>
+        <a href="/qdb/edit_question/{{ question.id }}" class="pull-right"><span style="font-size: 0.8em">Edit</span></a>
+      </center> <br>
       <li>
         {{ question.subject }} <i>{{ question.question_format }}</i>
         <div style="display: inline; white-space: pre-wrap;">{{ question.question }}</div> <span style="float: right; font-size: 0.8em;">Written by {{ question.author.first_name }} {{ question.author.last_name }}.</span> <br> <br>

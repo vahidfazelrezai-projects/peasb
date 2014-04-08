@@ -84,4 +84,5 @@ class QuestionForm(forms.ModelForm):
 class QuestionSelectForm(forms.Form):
     subject = forms.ModelChoiceField(queryset=Subject.objects.all(), widget=forms.Select(attrs={'onchange': 'filter()', 'class': 'form-control'}))
 
-
+class RoundOrderForm(forms.Form):
+    question_list = forms.CharField(widget=forms.TextInput({'id': 'question_list', 'style': 'display: none;'}))

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script>
+  $(function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+  });
+</script>
+{% endblock %}
+
+{% block body %}
+  {% include "navbar.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="page-header"><h1>{{ round.name }}
+    <div class="btn-group pull-right">
+      {% if user.is_staff %}
+        <a href="." class="btn btn-default">View</a>
+      {% endif %}
+      <a href="mod" class="btn btn-default">Mod</a>
+    </div>
+  </h1></div>
+
+  <form method="post" action="" class="form" id="order_form" style="padding-bottom: 20px; min-height: 100px;">{% csrf_token %}
+    {{ form.question_list }}
+    <input type="submit" class="btn btn-primary" style="float: right" value="Save">
+  </form>
+  <ol id="sortable">
+    {% for question in round.question_set.all|dictsort:"index" %}
+      <li class="el" id="{{ question.id }}">
+        <b>{{ question.question_type }}</b> {{ question.subject }} <i>{{ question.question_format }}</i>
+        <div style="display: inline; white-space: pre-wrap;">{{ question.question }}</div> <span style="float: right; font-size: 0.8em;">Written by {{ question.author.first_name }} {{ question.author.last_name }}.</span> <br> <br>
+        ANSWER: {{ question.answer }}<br>
+        <br> <br>
+      </li>
+    {% endfor %}
+  </ol>
+  <script>
+    $( "#order_form" ).submit(function() {
+      var str = "";
+      $( ".el" ).each(function() {
+        if(str === "") str += $( this ).attr('id');
+        else str += "," + $( this ).attr('id')
+      });
+      $( "#question_list" ).val(str);
+    });
+  </script>
+{% endblock %}
+
+
