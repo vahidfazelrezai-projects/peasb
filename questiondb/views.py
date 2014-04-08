@@ -77,10 +77,12 @@ def list_all_questions(request):
                   'questiondb/list_questions.html',
                   {'questions': questions, 'form': form, 'adj': 'All'})
 
-#@login_required(login_url='/login/')
-@staff_member_required
+@login_required(login_url='/login/')
 def list_rounds(request):
-    rounds = Round.objects.all()
+    if request.user.is_staff:
+        rounds = Round.objects.all()
+    else:
+        rounds = Round.objects.filter(public=True)
     return render(request, 'questiondb/list_rounds.html', {'rounds': rounds})
 
 # View for viewing round and adding questions to round

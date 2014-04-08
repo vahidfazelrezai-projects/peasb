@@ -23,6 +23,7 @@
             {% endif %}
           </ul>
           </li>
+          <li><a href="/qdb/list_rounds">Rounds</a></li>
           <li><a href="/password_change">Change Password</a></li>
           {% if user.is_staff %}
             <li class="dropdown">
@@ -30,7 +31,6 @@
             <ul class="dropdown-menu">
               <li><a href="/admin">Admin (backend)</a></li>
               <li><a href="/qdb/add_round">Add Round</a></li>
-              <li><a href="/qdb/list_rounds">View Round</a></li>
               <li><a href="/qdb/delete_round">Delete Round</a></li>
             </ul>
             </li>
