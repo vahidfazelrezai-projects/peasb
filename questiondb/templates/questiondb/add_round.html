@@ -8,6 +8,11 @@
   <div class="page-header"><h1>Add Round</h1></div>
   <form method="post" action="" style="max-width: 300px">{% csrf_token %}
     {{ form.name }}
+    <div class="checkbox">
+      <label>
+        {{ form.public }} Public?
+      </label>
+    </div>
     <input type="submit" class="btn btn-primary btn-block" value="Add">
   </form>
 {% endblock %}

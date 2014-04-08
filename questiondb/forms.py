@@ -6,7 +6,7 @@ from questiondb.models import Round, Question, Subject
 class RoundForm(forms.ModelForm):
     class Meta:
         model = Round
-        fields = ['name']
+        fields = ['name', 'public']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name'})
         }

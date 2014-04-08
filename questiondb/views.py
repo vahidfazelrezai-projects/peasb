@@ -80,9 +80,9 @@ def list_all_questions(request):
 @login_required(login_url='/login/')
 def list_rounds(request):
     if request.user.is_staff:
-        rounds = Round.objects.all()
+        rounds = Round.objects.all().order_by('-pub_date')
     else:
-        rounds = Round.objects.filter(public=True)
+        rounds = Round.objects.filter(public=True).order_by('-pub_date')
     return render(request, 'questiondb/list_rounds.html', {'rounds': rounds})
 
 # View for viewing round and adding questions to round
@@ -132,11 +132,12 @@ def add_round(request):
         if form.is_valid():
             r = Round(
                 name = form.cleaned_data['name'],
+                public = form.cleaned_data['public'],
                 author = request.user,
                 pub_date = timezone.now()
             )
             r.save()
-            return HttpResponseRedirect('/qdb')
+            return HttpResponseRedirect('/qdb/' + str(r.id))
     else:
         form = RoundForm()
     return render(request,
