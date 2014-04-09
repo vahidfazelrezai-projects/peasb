@@ -103,7 +103,11 @@
       $( "#bp" ).html(sc[2]);
     }
     $( document ).ready(function() {
-      $( ".res" ).append( $( "#team" ) );
+      if($( ".res" )[0]){
+        $( ".res" ).append( $( "#team" ) );
+      } else {
+        $( "#team" ).css("display", "none");
+      }
       $( ".sc" ).data("team", 0);
       $( ".sel" ).click(function() {
         var btn = $( this ).parent().parent().find(".btn");

@@ -170,6 +170,12 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: questiondb_round
+  properties:
+  - name: public
+  - name: pub_date
+    direction: desc
+
 - kind: questiondb_subject
   properties:
   - name: __key__
