@@ -111,29 +111,21 @@
       $( ".sc" ).data("team", 0);
       $( ".sel" ).click(function() {
         var btn = $( this ).parent().parent().find(".btn");
+        btn.removeClass("btn-default");
+        btn.removeClass("btn-primary");
+        btn.removeClass("btn-danger");
+        btn.removeClass("btn-purple");
         if($( this ).hasClass("white")){
           $( this ).parent().data("team", 0);
           btn.addClass("btn-default");
-          btn.removeClass("btn-primary");
-          btn.removeClass("btn-danger");
-          btn.removeClass("btn-purple");
         } else if($( this ).hasClass("red")){
           $( this ).parent().data("team", 1);
-          btn.removeClass("btn-default");
-          btn.removeClass("btn-primary");
           btn.addClass("btn-danger");
-          btn.removeClass("btn-purple");
         } else if($( this ).hasClass("blue")){
           $( this ).parent().data("team", 2);
-          btn.removeClass("btn-default");
-          btn.removeClass("btn-danger");
           btn.addClass("btn-primary");
-          btn.removeClass("btn-purple");
         } else {
           $( this ).parent().data("team", 3);
-          btn.removeClass("btn-default");
-          btn.removeClass("btn-danger");
-          btn.removeClass("btn-primary");
           btn.addClass("btn-purple");
         }
         calc();
