@@ -55,21 +55,32 @@
     </table>
   </div>
   <script>
+    var map = {};
+    {% if subject_freq %}
+      {% for key, value in subject_freq.items %}
+        map["{{ key }}"] = {{ value }};
+      {% endfor %}
+      map["---------"] = {{ subject_freq.total }};
+    {% endif %}
     function filter() {
       var sel = $("#id_subject")[0];
       var target = sel.options[sel.selectedIndex].text;
       var t = $("#q_list")[0];
       var count = 0;
 
-      for (var i = 1; i < t.rows.length; i++) {
-        if (t.rows[i].className === target || target === "---------"){
-          t.rows[i].style.display="table-row";
-          count++;
-        } else {
-          t.rows[i].style.display="none";
+      {% if subject_freq %}
+        $( ".count" ).html(map[target] + " total");
+      {% else %}
+        $( ".count" ).html(count + " questions");
+        for (var i = 1; i < t.rows.length; i++) {
+          if (t.rows[i].className === target || target === "---------"){
+            t.rows[i].style.display="table-row";
+            count++;
+          } else {
+            t.rows[i].style.display="none";
+          }
         }
-      }
-      $( ".count" ).html(count + " questions");
+      {% endif %}
     }
     window.onload = filter();
   </script>

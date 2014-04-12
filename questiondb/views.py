@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 
-from questiondb.models import Round, Question
+from questiondb.models import Round, Question, Subject
 from questiondb.forms import RoundForm, RoundEditForm, RoundDeleteForm, QuestionForm, QuestionSelectForm, RoundOrderForm
 
 # Index page. 
@@ -57,9 +57,13 @@ def edit_question(request, question_id):
 def list_questions(request):
     questions = Question.objects.filter(problemset=None).order_by('-pub_date')[:10]
     form = QuestionSelectForm()
+    subject_freq = {}
+    subject_freq["total"] = Question.objects.filter(problemset=None).count()
+    for subject in Subject.objects.all():
+        subject_freq[subject] = Question.objects.filter(problemset=None, subject=subject).count()
     return render(request,
                   'questiondb/list_questions.html',
-                  {'questions': questions, 'form': form, 'adj': 'New'})
+                  {'questions': questions, 'form': form, 'adj': 'New', 'subject_freq': subject_freq})
 
 @login_required(login_url='/login/')
 def list_my_questions(request):
