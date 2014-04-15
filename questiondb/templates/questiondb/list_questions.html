@@ -71,7 +71,6 @@
       {% if subject_freq %}
         $( ".count" ).html(map[target] + " total");
       {% else %}
-        $( ".count" ).html(count + " questions");
         for (var i = 1; i < t.rows.length; i++) {
           if (t.rows[i].className === target || target === "---------"){
             t.rows[i].style.display="table-row";
@@ -80,6 +79,7 @@
             t.rows[i].style.display="none";
           }
         }
+        $( ".count" ).html(count + " questions");
       {% endif %}
     }
     window.onload = filter();
